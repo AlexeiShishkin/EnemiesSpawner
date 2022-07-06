@@ -2,7 +2,7 @@
 
 public class Spawner : ObjectPool
 {
-    [SerializeField] private GameObject _enemyPrefab;
+    [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private Transform[] _spawnPoints;
     [SerializeField] private float _timeBetweenSpawns;
 
@@ -19,7 +19,7 @@ public class Spawner : ObjectPool
 
         if (_cooldown <= 0)
         {
-            if (TryGetObject(out GameObject enemy))
+            if (TryGetObject(out Enemy enemy))
             {
                 int spawnPointNumber = Random.Range(0, _spawnPoints.Length);
                 SetEnemy(enemy, _spawnPoints[spawnPointNumber].position);
@@ -29,9 +29,9 @@ public class Spawner : ObjectPool
         }
     }
 
-    private void SetEnemy(GameObject enemy, Vector3 spawnPoint)
+    private void SetEnemy(Enemy enemy, Vector3 spawnPoint)
     {
         enemy.transform.position = spawnPoint;
-        enemy.SetActive(true);
+        enemy.Activate();
     }
 }

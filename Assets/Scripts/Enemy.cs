@@ -2,22 +2,20 @@
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _speed;
+    public bool IsActive => gameObject.activeSelf;
 
-    private Vector2 _direction;
-
-    private void OnEnable()
+    public void Activate()
     {
-        _direction = Random.insideUnitCircle.normalized;
+        gameObject.SetActive(true);
     }
 
-    private void OnBecameInvisible()
+    public void Deactivate()
     {
         gameObject.SetActive(false);
     }
 
-    private void Update()
+    private void OnBecameInvisible()
     {
-        transform.Translate(_speed * Time.deltaTime * _direction);
+        Deactivate();
     }
 }
